@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mural de Idéias</title>
+    <style>
+        html {
+            padding: 0%;
+            margin: 0%;
+        }
+
+        body {
+            font-family: cursive;
+            background-color: #5e94c4;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #área-dados {
+            margin-bottom: 20px;
+        }
+
+
+
+
+        #área-dados input {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #área-dados button {
+            padding: 10px 15px;
+            font-size: 16px;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        #área-dados .limpar {
+            background-color: red;
+            color: black;
+        }
+
+        #área-dados #Adicionar {
+            background-color: chartreuse;
+            color: black;
+        }
+
+        #Mural {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+
+        .cartao-ideia {
+            background: #df8ccd;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px 2px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            opacity: 1;
+            /*word-break: break-all; 
+            Quebra a palavra no meio caso necessário*/
+            white-space: break-spaces;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <link rel="shortcut icon" type="img/png"
+        href="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTYCYgNC-YX-AL8k46jyDh37VEYZMIo2XPt6QI2Swqc5VZqTr2HM_SC1oXCNGGCu7SUxS4o" />
+</head>
+
+<body>
+    <h1>Mural de Idéias</h1>
+    <h2>Crie suas ideias e salve por aqui</h2>
+    <div class="área-dados" id="área-dados">
+        <input type="text" id="inputIdeia" placeholder="Digite suas ideias">
+        <button onclick="AdicionarIdeia()" id="Adicionar">Adicionar</button>
+        <button onclick="limparIdeias()" class="limpar">Remover Tudo</button>
+        </style>
+
+    </div>
+
+    <div id="Mural"></div>
+
+    <script>
+
+        document.getElementById('inputIdeia').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                AdicionarIdeia();
+            }
+        });
+        function AdicionarIdeia() {
+            const input = document.getElementById('inputIdeia')
+            const ideia = input.value
+
+            if (ideia === '') {
+                alert('a ideia não pode ser vazia')
+                return
+            }
+            const cartaoideia = document.createElement('div')
+            cartaoideia.className = "cartao-ideia"
+            cartaoideia.style.borderLeft = `5px solid ${corAleatoria()}`
+            cartaoideia.textContent = ideia
+            document.getElementById('Mural').appendChild(cartaoideia)
+            input.value = ''
+        }
+
+        function limparIdeias() {
+            document.getElementById('Mural').innerHTML = ''
+        }
+
+        function corAleatoria() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+
+            return color;
+        }
+
+
+
+    </script>
+</body>
+
+</html>
